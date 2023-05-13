@@ -142,27 +142,20 @@ class MiniBatchGradientDescent:
         
 	def backward_pass(self, num):
 		#Pada output layer
-		#print("Pada output layer")
 		for i in range (len(self.output_layer.nodes)):
 			# derivasi nilai error terhadap nilai output
 			dError_dOutput = self.get_error(self.output_layer.activation_function_name, self.target[num][i], self.output_layer.nodes[i].activation_function_value, derivative=True)
-			#print("dError_dOutput = ",dError_dOutput)
 
 			# derivasi nilai output terhadap nilai input (sigma)
 			if (self.output_layer.nodes[i].activation_function_name == 'softmax'):
 				dOutput_dInput = self.output_layer.nodes[i].activation_function(self.output_layer.nodes[i].sigma, self.output_layer.sigma, derivative=True)
 			else:
 				dOutput_dInput = self.output_layer.nodes[i].activation_function(self.output_layer.nodes[i].sigma, derivative=True)
-			#print("dOutput_dInput = ",dOutput_dInput)
         
 			# update nilai delta error
 			self.output_layer.nodes[i].deltaError = dError_dOutput * dOutput_dInput
-			#print("deltaError = ", self.output_layer.nodes[i].deltaError)
-            
-			#print("=========================================================")
         
 		#Pada hidden Layer
-		#print("Pada hidden layer")
 		for i in range (self.n_hidden_layer):
 			# derivasi nilai error terhadap nilai output
 			dError_dOutput = []
@@ -170,12 +163,9 @@ class MiniBatchGradientDescent:
 				for j in range (len(self.output_layer.nodes)):
 					for k in range (len(self.output_layer.nodes[j].weight)):
 						if (j == 0):
-							#print(f"perkalian {self.output_layer.nodes[j].deltaError} dengan {self.output_layer.nodes[j].weight[k]} ")
 							dError_dOutput.append(self.output_layer.nodes[j].deltaError * self.output_layer.nodes[j].weight[k])
 						else:
-							#print(f"perkalian {self.output_layer.nodes[j].deltaError} dengan {self.output_layer.nodes[j].weight[k]} dan dijumlahkan dengan {dError_dOutput[k]} ")
 							dError_dOutput[k] = dError_dOutput[k] + self.output_layer.nodes[j].deltaError * self.output_layer.nodes[j].weight[k]
-					#print("dError_dOutput = ",dError_dOutput)
             
 			else:
 				for j in range (len(self.hidden_layer[-1 - i].nodes)):
@@ -184,7 +174,6 @@ class MiniBatchGradientDescent:
 							dError_dOutput.append(self.hidden_layer[-1 - i].nodes[j].deltaError * self.hidden_layer[-1 - i].nodes[j].weight[k])
 						else:
 							dError_dOutput[k] = dError_dOutput[k] + self.hidden_layer[-1 - i].nodes[j].deltaError * self.hidden_layer[-1 - i].nodes[j].weight[k]
-					#print("total dError_dOutput = ",dError_dOutput)
 
 			for j in range (len(self.hidden_layer[i].nodes)):
 				# derivasi nilai output terhadap nilai input (sigma)
@@ -192,13 +181,10 @@ class MiniBatchGradientDescent:
 					dOutput_dInput = self.hidden_layer[i].nodes[j].activation_function(self.hidden_layer[i].nodes[j].sigma, self.hidden_layer[i].sigma)
 				else:
 					dOutput_dInput = self.hidden_layer[i].nodes[j].activation_function(self.hidden_layer[i].nodes[j].sigma, derivative=True)
-				#print("dOutput_dInput = ",dOutput_dInput)
 
 				# update nilai delta error
 				self.hidden_layer[i].nodes[j].deltaError = dError_dOutput[j] * dOutput_dInput
-				#print("deltaError = ", self.hidden_layer[i].nodes[j].deltaError)
 
-			#print("=========================================================")
                 
 	def updateDelta(self, i):
 		#Untuk hidden layer
@@ -274,8 +260,3 @@ class MiniBatchGradientDescent:
 			print(f"Pada node yang ke-{j+1} terdapat")
 			print(f"Bias: {self.output_layer.nodes[j].bias}")
 			print(f"Weight: {self.output_layer.nodes[j].weight}")
-            
-		#print("")
-		#print(f"Target yang diharapkan")
-		#for j in range (len(self.target)):
-			#print(self.target[j])
