@@ -10,7 +10,12 @@ import numpy as np
 from mbgd import MiniBatchGradientDescent
 
 def generate_model(filePath):
-	model = open(filePath)
+
+	try:
+		model = open(filePath)
+	except FileNotFoundError:
+		return False
+
 	model_data = json.loads(model.read())
 	model.close()
 
