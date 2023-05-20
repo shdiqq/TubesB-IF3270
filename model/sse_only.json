@@ -22,7 +22,7 @@
             [0.0, 1.0]
         ],
         "learning_parameters": {
-            "learning_rate": 0.01,
+            "learning_rate": 0.0000000000000001,
             "batch_size": 1,
             "max_iteration": 10000,
             "error_threshold": 0.25

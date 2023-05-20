@@ -13,7 +13,7 @@ class Node:
 	def __init__(self, bias, weight, deltaWeight, activation_function_name, activation_function):
 		self.bias = bias
 		self.weight = weight
-		self.sigma = 0
+		self.net = 0
 		self.activation_function = activation_function
 		self.activation_function_name = activation_function_name
 		self.activation_function_value = 0
@@ -22,9 +22,9 @@ class Node:
 		self.deltaWeight = deltaWeight
 		self.deltaError = 0
 
-	def calculate_sigma(self, inputData):
-		self.sigma = np.dot(self.weight, inputData)
-		self.sigma += self.bias
+	def calculate_net(self, inputData):
+		self.net = np.dot(self.weight, inputData)
+		self.net += self.bias
         
 	def calculate_error(self, target):
 		if (self.activation_function_name == "softmax"):
@@ -34,9 +34,9 @@ class Node:
 
 	def activate_neuron(self, sum = None):
 		if (self.activation_function_name != 'softmax'):
-			self.activation_function_value = self.activation_function(self.sigma)
+			self.activation_function_value = self.activation_function(self.net)
 		else:
-			self.activation_function_value = self.activation_function(self.sigma, sum)
+			self.activation_function_value = self.activation_function(self.net, sum)
 
 	def update_delta_bias(self, learning_rate):
 		self.deltaBias += learning_rate * self.deltaError * 1

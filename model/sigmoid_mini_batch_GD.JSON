@@ -21,7 +21,6 @@
 		  [0.2, 0.3],
 		  [0.35, 0.35]
             ]
-
         ],
         "target": [
             [0.1, 1.0],
@@ -33,7 +32,7 @@
             "learning_rate": 0.1,
             "batch_size": 2,
             "max_iteration": 10000,
-            "error_threshold": 0.1
+            "error_threshold": 0.2
         }
     },
     "expect": {

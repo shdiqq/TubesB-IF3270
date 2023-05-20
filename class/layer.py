@@ -32,7 +32,7 @@ class Layer:
 		else :
 			self.weights = weights
 			self.bias = bias
-		self.sigma = []
+		self.net = []
 		self.nodes = []
 		self.generate_nodes()
 
