@@ -37,7 +37,6 @@ class Layer:
 		self.generate_nodes()
 
 	def generate_nodes(self):
-		self.nodes = []
 		for i in range(self.n_neuron):
 			thisWeight = []
 			thisDeltaWeight = []

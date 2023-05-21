@@ -1,5 +1,4 @@
 from function.generateModel import generate_model
-from function.visualize import visualize
 
 def runMainModel():
   while (True):
@@ -13,9 +12,9 @@ def runMainModel():
       break
 
   #Informasi Awal
-  visualize(mbgd)
+  mbgd.visualize()
 
   mbgd.train()
 
   #Informasi Akhir
-  visualize(mbgd)
+  mbgd.visualize()
